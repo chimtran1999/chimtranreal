@@ -1,39 +1,932 @@
-
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>CHIM TRẦN REAL | SHOP WEB</title>
-
-    <meta name="description" content="CHIM TRẦN REAL - Official Shop Website">
-    <meta name="theme-color" content="#ffffff">
-
+    <title>Chim Trần Real - Luxury Fashion & Lifestyle</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0a0a0a',
+                            card: '#141414',
+                            gold: '#d4af37',
+                            goldLight: '#f3e5ab',
+                            goldDark: '#aa8c2c',
+                            grayLight: '#f9f9f9',
+                            muted: '#888888'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%;
-            min-height: 100%;
-            background: #ffffff;
-            font-family: Arial, sans-serif;
-        }
-
         body {
-            min-height: 100vh;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0a0a0a;
+            color: #f3f3f3;
+        }
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-bg-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
+        }
+        .gold-border {
+            border-color: #d4af37;
+        }
+        /* Glassmorphism */
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glass-card {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease forwards;
         }
     </style>
 </head>
+<body class="bg-brand-dark text-white antialiased selection:bg-brand-gold selection:text-black">
 
-<body>
+    <!-- Notification Toast Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-3 pointer-events-none"></div>
 
-    <!-- CHIM TRẦN REAL -->
-    <!-- Website đang ở trạng thái khởi tạo trống -->
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-nav border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="lg:hidden text-white hover:text-brand-gold focus:outline-none text-xl p-2">
+                <i class="fa-solid fa-bars"></i>
+            </button>
 
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-2 group">
+                <div class="w-10 h-10 rounded-full gold-bg-gradient flex items-center justify-center shadow-lg shadow-brand-gold/20 group-hover:rotate-12 transition-transform duration-300">
+                    <span class="font-serif font-bold text-black text-xl">C</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-2xl sm:text-3xl font-bold tracking-wider gold-gradient">CHIM TRẦN REAL</span>
+                    <span class="text-[9px] tracking-[0.3em] uppercase text-brand-muted -mt-1">Luxury Atelier</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:flex items-center space-x-8 font-medium text-sm tracking-wide">
+                <a href="#" class="text-brand-gold hover:text-brand-goldLight transition-colors">Trang Chủ</a>
+                <a href="#san-pham" class="text-gray-300 hover:text-brand-gold transition-colors">Sản Phẩm</a>
+                <a href="#bo-suu-tap" class="text-gray-300 hover:text-brand-gold transition-colors">Bộ Sưu Tập</a>
+                <a href="#ve-chung-toi" class="text-gray-300 hover:text-brand-gold transition-colors">Về Chúng Tôi</a>
+                <a href="#lien-he" class="text-gray-300 hover:text-brand-gold transition-colors">Liên Hệ</a>
+            </nav>
+
+            <!-- Actions (Search, Wishlist, Cart) -->
+            <div class="flex items-center space-x-4 sm:space-x-6">
+                <!-- Search Button -->
+                <button onclick="toggleSearchModal()" class="text-gray-300 hover:text-brand-gold transition-colors text-lg p-2" title="Tìm kiếm">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <!-- Wishlist -->
+                <button onclick="showToast('Tính năng Yêu thích đang cập nhật', 'info')" class="hidden sm:block text-gray-300 hover:text-brand-gold transition-colors text-lg p-2 relative" title="Yêu thích">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-brand-gold rounded-full"></span>
+                </button>
+                <!-- Cart Drawer Toggle -->
+                <button onclick="toggleCartDrawer()" class="relative bg-brand-card border border-brand-gold/30 hover:border-brand-gold p-2.5 rounded-full text-brand-gold hover:text-brand-goldLight transition-all duration-300 shadow-md group">
+                    <i class="fa-solid fa-bag-shopping text-lg"></i>
+                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-brand-gold text-black font-bold text-xs w-5 h-5 rounded-full flex items-center justify-center shadow group-hover:scale-110 transition-transform">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-brand-dark/95 z-50 transform -translate-x-full transition-transform duration-300 lg:hidden flex flex-col p-6">
+        <div class="flex items-center justify-between pb-6 border-b border-white/10">
+            <span class="font-serif text-2xl font-bold gold-gradient">CHIM TRẦN REAL</span>
+            <button onclick="toggleMobileMenu()" class="text-white text-2xl p-2 hover:text-brand-gold"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="flex flex-col space-y-6 pt-8 text-lg font-medium">
+            <a href="#" onclick="toggleMobileMenu()" class="text-brand-gold">Trang Chủ</a>
+            <a href="#san-pham" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-gold">Sản Phẩm</a>
+            <a href="#bo-suu-tap" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-gold">Bộ Sưu Tập</a>
+            <a href="#ve-chung-toi" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-gold">Về Chúng Tôi</a>
+            <a href="#lien-he" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-gold">Liên Hệ</a>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Banner with Parallax-like Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1920&auto=format&fit=crop" alt="Luxury Fashion" class="w-full h-full object-cover object-center filter brightness-50 scale-105 transition-transform duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full glass-card border-brand-gold/40 mb-6 animate-fade-in">
+                <i class="fa-solid fa-crown text-brand-gold text-sm"></i>
+                <span class="text-xs font-semibold tracking-widest uppercase text-brand-gold">Bộ Sưu Tập Mùa Đông 2026</span>
+            </div>
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-none">
+                Đẳng Cấp <span class="gold-gradient italic">Thượng Lưu</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-gray-300 text-base sm:text-xl mb-10 font-light leading-relaxed">
+                Khám phá tuyệt tác thời gian và thời trang cao cấp từ Chim Trần Real. Nơi sự tinh tế kết hợp hoàn hảo cùng phong cách cá nhân độc tôn.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#san-pham" class="w-full sm:w-auto px-8 py-4 gold-bg-gradient text-black font-semibold rounded-full shadow-lg shadow-brand-gold/20 hover:opacity-90 transition-all transform hover:-translate-y-0.5 text-center">
+                    Khám Phá Bộ Sưu Tập
+                </a>
+                <a href="#ve-chung-toi" class="w-full sm:w-auto px-8 py-4 glass-card text-white hover:border-brand-gold font-semibold rounded-full transition-all text-center">
+                    Câu Chuyện Thương Hiệu
+                </a>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-20 pt-10 border-t border-white/10 max-w-3xl mx-auto">
+                <div class="text-center">
+                    <p class="font-serif text-3xl sm:text-4xl font-bold text-brand-gold">100%</p>
+                    <p class="text-xs sm:text-sm text-brand-muted uppercase tracking-wider mt-1">Chính Hãng Real</p>
+                </div>
+                <div class="text-center">
+                    <p class="font-serif text-3xl sm:text-4xl font-bold text-brand-gold">50K+</p>
+                    <p class="text-xs sm:text-sm text-brand-muted uppercase tracking-wider mt-1">Khách Hàng VIP</p>
+                </div>
+                <div class="text-center col-span-2 md:col-span-1">
+                    <p class="font-serif text-3xl sm:text-4xl font-bold text-brand-gold">24/7</p>
+                    <p class="text-xs sm:text-sm text-brand-muted uppercase tracking-wider mt-1">Hỗ Trợ Riêng Biệt</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORIES SECTION -->
+    <section id="bo-suu-tap" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Curated Collections</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold mt-2">Danh Mục Nổi Bật</h2>
+            <div class="w-16 h-0.5 bg-brand-gold mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Category 1 -->
+            <div onclick="filterCategory('Thời Trang')" class="group relative h-96 rounded-2xl overflow-hidden cursor-pointer shadow-2xl glass-card">
+                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=800&auto=format&fit=crop" alt="Thời Trang Cao Cấp" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-300">
+                    <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Bộ Sưu Tập 01</span>
+                    <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white mt-1 group-hover:text-brand-gold transition-colors">Thời Trang Cao Cấp</h3>
+                    <p class="text-sm text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Thiết kế độc quyền, chất liệu thượng hạng từ Ý và Pháp.</p>
+                </div>
+            </div>
+
+            <!-- Category 2 -->
+            <div onclick="filterCategory('Phụ Kiện')" class="group relative h-96 rounded-2xl overflow-hidden cursor-pointer shadow-2xl glass-card">
+                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop" alt="Phụ Kiện & Đồng Hồ" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Bộ Sưu Tập 02</span>
+                    <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white mt-1 group-hover:text-brand-gold transition-colors">Phụ Kiện & Đồng Hồ</h3>
+                    <p class="text-sm text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Tôn vinh phong thái lịch lãm và bản lĩnh phái mạnh.</p>
+                </div>
+            </div>
+
+            <!-- Category 3 -->
+            <div onclick="filterCategory('Nước Hoa')" class="group relative h-96 rounded-2xl overflow-hidden cursor-pointer shadow-2xl glass-card">
+                <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=800&auto=format&fit=crop" alt="Nước Hoa Signature" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Bộ Sưu Tập 03</span>
+                    <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white mt-1 group-hover:text-brand-gold transition-colors">Nước Hoa Signature</h3>
+                    <p class="text-sm text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Hương thơm vương giả lưu dấu ấn cá nhân khó phai.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS SECTION -->
+    <section id="san-pham" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+                <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Exquisite Selection</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold mt-2">Sản Phẩm Đẳng Cấp</h2>
+            </div>
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap gap-2 mt-6 md:mt-0 bg-brand-card p-1.5 rounded-full border border-brand-gold/20">
+                <button onclick="filterProducts('Tất cả', this)" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-all bg-brand-gold text-black shadow">Tất Cả</button>
+                <button onclick="filterProducts('Giới hạn', this)" class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all text-gray-300 hover:text-brand-gold">Giới Hạn</button>
+                <button onclick="filterProducts('Mới nhất', this)" class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all text-gray-300 hover:text-brand-gold">Mới Nhất</button>
+                <button onclick="filterProducts('Best Seller', this)" class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all text-gray-300 hover:text-brand-gold">Best Seller</button>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Products will be injected via JS -->
+        </div>
+    </section>
+
+    <!-- BRAND STORY / ABOUT SECTION -->
+    <section id="ve-chung-toi" class="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-brand-dark to-black border-y border-white/10 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">The Chim Trần Real Legacy</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold mt-2 mb-6">Biểu Tượng Của Sự Hoàn Mỹ & Uy Tín</h2>
+                <p class="text-gray-300 font-light leading-relaxed mb-6">
+                    Được thành lập với tầm nhìn định nghĩa lại tiêu chuẩn xa xỉ tại Việt Nam, <strong class="text-white font-medium">Chim Trần Real</strong> cam kết mang đến những sản phẩm độc bản, đạt tiêu chuẩn quốc tế từ các nhà mốt hàng đầu thế giới và xưởng chế tác thủ công danh tiếng.
+                </p>
+                <div class="grid grid-cols-2 gap-6 mb-8">
+                    <div class="p-4 rounded-xl glass-card">
+                        <i class="fa-solid fa-gem text-brand-gold text-2xl mb-2"></i>
+                        <h4 class="font-serif font-bold text-lg">Chất Lượng Thượng Hạng</h4>
+                        <p class="text-xs text-brand-muted mt-1">Tuyển chọn khắt khe từng chi tiết nhỏ nhất.</p>
+                    </div>
+                    <div class="p-4 rounded-xl glass-card">
+                        <i class="fa-solid fa-shield-halved text-brand-gold text-2xl mb-2"></i>
+                        <h4 class="font-serif font-bold text-lg">Bảo Hành Tuyệt Đối</h4>
+                        <p class="text-xs text-brand-muted mt-1">Chính sách bảo chứng và bảo dưỡng độc quyền.</p>
+                    </div>
+                </div>
+                <a href="#lien-he" class="inline-block px-8 py-4 gold-bg-gradient text-black font-semibold rounded-full shadow-lg hover:opacity-90 transition-all">
+                    Trải Nghiệm Dịch Vụ VIP
+                </a>
+            </div>
+            <div class="relative">
+                <div class="relative h-[450px] rounded-2xl overflow-hidden glass-card shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1000&auto=format&fit=crop" alt="Showroom Chim Trần Real" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6 p-6 glass-card rounded-xl">
+                        <p class="font-serif italic text-lg text-brand-gold">"Sự sang trọng không nằm ở sự hào nhoáng phô trương, mà nằm ở sự tinh tế không tì vết."</p>
+                        <p class="text-xs uppercase tracking-widest text-brand-muted mt-2">— Founder Chim Trần Real</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Client Testimonials</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold mt-2">Khách Hàng Nói Gì Về Chúng Tôi</h2>
+            <div class="w-16 h-0.5 bg-brand-gold mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Review 1 -->
+            <div class="p-8 rounded-2xl glass-card relative flex flex-col justify-between">
+                <div>
+                    <div class="flex text-brand-gold space-x-1 mb-4 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 font-light italic text-sm leading-relaxed">
+                        "Sản phẩm tại Chim Trần Real thực sự vượt kỳ vọng của tôi. Từ chất liệu đến hộp đựng và dịch vụ chăm sóc VIP đều hoàn hảo tuyệt đối."
+                    </p>
+                </div>
+                <div class="flex items-center space-x-4 mt-6 pt-6 border-t border-white/10">
+                    <div class="w-12 h-12 rounded-full gold-bg-gradient flex items-center justify-center font-bold text-black font-serif text-xl">HA</div>
+                    <div>
+                        <h4 class="font-bold text-white">Doanh nhân Hoàng Anh</h4>
+                        <p class="text-xs text-brand-muted">Hà Nội</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="p-8 rounded-2xl glass-card relative flex flex-col justify-between">
+                <div>
+                    <div class="flex text-brand-gold space-x-1 mb-4 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 font-light italic text-sm leading-relaxed">
+                        "Tôi đã mua nước hoa và phụ kiện tại đây làm quà tặng đối tác. Ai cũng khen sự tinh tế và đẳng cấp. Chắc chắn sẽ ủng hộ dài lâu."
+                    </p>
+                </div>
+                <div class="flex items-center space-x-4 mt-6 pt-6 border-t border-white/10">
+                    <div class="w-12 h-12 rounded-full gold-bg-gradient flex items-center justify-center font-bold text-black font-serif text-xl">MT</div>
+                    <div>
+                        <h4 class="font-bold text-white">Minh Tú</h4>
+                        <p class="text-xs text-brand-muted">TP. Hồ Chí Minh</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="p-8 rounded-2xl glass-card relative flex flex-col justify-between">
+                <div>
+                    <div class="flex text-brand-gold space-x-1 mb-4 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 font-light italic text-sm leading-relaxed">
+                        "Dịch vụ giao hàng hỏa tốc trong 2h cùng sự tận tâm của đội ngũ tư vấn viên khiến tôi hoàn toàn yên tâm tuyệt đối khi mua sắm hàng hiệu."
+                    </p>
+                </div>
+                <div class="flex items-center space-x-4 mt-6 pt-6 border-t border-white/10">
+                    <div class="w-12 h-12 rounded-full gold-bg-gradient flex items-center justify-center font-bold text-black font-serif text-xl">KN</div>
+                    <div>
+                        <h4 class="font-bold text-white">Khánh Nam</h4>
+                        <p class="text-xs text-brand-muted">Đà Nẵng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER / CONTACT SECTION -->
+    <section id="lien-he" class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div class="p-8 sm:p-12 rounded-3xl glass-card border border-brand-gold/30 text-center relative overflow-hidden shadow-2xl">
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+            <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Private Club</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-2 mb-4">Đăng Ký Nhận Đặc Quyền VIP</h2>
+            <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto mb-8 font-light">
+                Trở thành hội viên để nhận thông tin bộ sưu tập giới hạn trước khi ra mắt và voucher ưu đãi độc quyền 20% cho đơn hàng đầu tiên.
+            </p>
+            <form onsubmit="handleNewsletter(event)" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input type="email" required placeholder="Nhập email của bạn..." class="flex-1 bg-brand-dark border border-brand-gold/40 rounded-full px-6 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-brand-gold text-sm">
+                <button type="submit" class="gold-bg-gradient text-black font-semibold px-8 py-3.5 rounded-full hover:opacity-90 transition-all text-sm shadow-lg">
+                    Đăng Ký Ngay
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-white/10 pt-16 pb-12 text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div>
+                <div class="flex items-center space-x-2 mb-4">
+                    <div class="w-8 h-8 rounded-full gold-bg-gradient flex items-center justify-center font-bold text-black font-serif">C</div>
+                    <span class="font-serif text-xl font-bold text-white tracking-wider">CHIM TRẦN REAL</span>
+                </div>
+                <p class="text-xs text-brand-muted leading-relaxed mb-4">
+                    Hệ thống bán lẻ và phân phối thời trang, phụ kiện xa xỉ chính hãng hàng đầu Việt Nam.
+                </p>
+                <div class="flex space-x-4 text-lg">
+                    <a href="#" class="text-gray-400 hover:text-brand-gold transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-brand-gold transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-brand-gold transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-brand-gold transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-serif text-white font-bold text-base mb-4 tracking-wider uppercase">Danh Mục</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#san-pham" class="hover:text-brand-gold transition-colors">Thời Trang Nam/Nữ</a></li>
+                    <li><a href="#san-pham" class="hover:text-brand-gold transition-colors">Đồng Hồ Chính Hãng</a></li>
+                    <li><a href="#san-pham" class="hover:text-brand-gold transition-colors">Nước Hoa Signature</a></li>
+                    <li><a href="#san-pham" class="hover:text-brand-gold transition-colors">Phụ Kiện Da Cao Cấp</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-serif text-white font-bold text-base mb-4 tracking-wider uppercase">Hỗ Trợ Khách Hàng</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Chính Sách Bảo Hành</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Hướng Dẫn Mua Hàng VIP</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Chính Sách Đổi Trả</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Hỏi Đáp Thường Gặp</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-serif text-white font-bold text-base mb-4 tracking-wider uppercase">Liên Hệ Showroom</h4>
+                <ul class="space-y-3 text-xs">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-location-dot text-brand-gold mt-0.5"></i>
+                        <span>Tầng 68, Landmark Tower, Quận 1, TP. Hồ Chí Minh</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <i class="fa-solid fa-phone text-brand-gold"></i>
+                        <span>Hotline VIP: 1900 8888 99</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <i class="fa-solid fa-envelope text-brand-gold"></i>
+                        <span>contact@chimtranreal.vn</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-brand-muted">
+            <p>&copy; 2026 Chim Trần Real Atelier. All Rights Reserved.</p>
+            <div class="flex space-x-6 mt-4 sm:mt-0">
+                <a href="#" class="hover:text-brand-gold">Điều khoản dịch vụ</a>
+                <a href="#" class="hover:text-brand-gold">Chính sách bảo mật</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SLIDE-OUT CART DRAWER -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none">
+        <!-- Backdrop -->
+        <div id="cart-backdrop" onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+
+        <!-- Drawer Content -->
+        <div id="cart-panel" class="absolute inset-y-0 right-0 max-w-md w-full bg-brand-card border-l border-brand-gold/20 shadow-2xl transform translate-x-full transition-transform duration-300 pointer-events-auto flex flex-col">
+            <!-- Drawer Header -->
+            <div class="p-6 border-b border-white/10 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-bag-shopping text-brand-gold text-xl"></i>
+                    <h3 class="font-serif text-xl font-bold text-white">Giỏ Hàng Của Bạn</h3>
+                    <span id="cart-count-badge" class="bg-brand-gold text-black font-bold text-xs px-2 py-0.5 rounded-full">0</span>
+                </div>
+                <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white text-xl p-2"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4 divide-y divide-white/5">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- Drawer Footer -->
+            <div class="p-6 border-t border-white/10 bg-brand-dark">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-gray-400 text-sm">Tổng Tạm Tính:</span>
+                    <span id="cart-total-price" class="font-serif text-2xl font-bold text-brand-gold">0 đ</span>
+                </div>
+                <p class="text-[11px] text-brand-muted mb-6">Đã bao gồm thuế VAT và phí đóng gói hộp quà VIP.</p>
+                <button onclick="checkout()" class="w-full py-4 gold-bg-gradient text-black font-bold rounded-full shadow-lg hover:opacity-90 transition-all text-center">
+                    Tiến Hành Thanh Toán Ngay
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK VIEW / PRODUCT DETAIL MODAL -->
+    <div id="quick-view-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div onclick="closeQuickView()" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="relative bg-brand-card border border-brand-gold/30 rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl z-10 transform scale-95 transition-transform duration-300" id="quick-view-panel">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-brand-dark/80 text-white flex items-center justify-center hover:bg-brand-gold hover:text-black transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="quick-view-content" class="grid grid-cols-1 md:grid-cols-2 max-h-[85vh] overflow-y-auto">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SEARCH MODAL -->
+    <div id="search-modal" class="fixed inset-0 z-50 bg-brand-dark/95 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col p-6">
+        <div class="max-w-3xl mx-auto w-full pt-12">
+            <div class="flex items-center justify-between mb-8">
+                <span class="font-serif text-2xl font-bold gold-gradient">Tìm Kiếm Sản Phẩm</span>
+                <button onclick="toggleSearchModal()" class="text-white text-2xl p-2 hover:text-brand-gold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="relative">
+                <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Nhập tên sản phẩm, bộ sưu tập..." class="w-full bg-brand-card border-2 border-brand-gold/40 rounded-full px-6 py-4 text-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-gold shadow-2xl pl-14">
+                <i class="fa-solid fa-magnifying-glass absolute left-5 top-5 text-brand-gold text-xl"></i>
+            </div>
+            <div id="search-results" class="mt-8 space-y-4 max-h-[60vh] overflow-y-auto">
+                <!-- Results injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Database Sản Phẩm
+        const products = [
+            {
+                id: 1,
+                name: "Áo Blazer Lụa Hoàng Gia Ý",
+                category: "Thời Trang",
+                tag: "Giới hạn",
+                price: 8500000,
+                oldPrice: 11000000,
+                image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=800&auto=format&fit=crop",
+                rating: 5,
+                desc: "Được dệt thủ công từ sợi lụa thượng hạng nhập khẩu từ Milan, mang đến sự sang trọng và lịch lãm tối thượng cho quý ông."
+            },
+            {
+                id: 2,
+                name: "Đồng Hồ Automatic Gold Master",
+                category: "Phụ Kiện",
+                tag: "Best Seller",
+                price: 24500000,
+                oldPrice: 28000000,
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop",
+                rating: 5,
+                desc: "Mặt kính sapphire nguyên khối, khung mạ vàng 18K cùng bộ máy cơ Thụy Sĩ chính xác tuyệt đối."
+            },
+            {
+                id: 3,
+                name: "Nước Hoa Signature Chim Trần Noir",
+                category: "Nước Hoa",
+                tag: "Mới nhất",
+                price: 4200000,
+                oldPrice: 5000000,
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=800&auto=format&fit=crop",
+                rating: 5,
+                desc: "Hương thơm trầm ấm pha trộn giữa gỗ tuyết tùng và hổ phách quý hiếm, lưu hương suốt 24 giờ."
+            },
+            {
+                id: 4,
+                name: "Túi Xách Da Cá Sấu Hoàng Tộc",
+                category: "Phụ Kiện",
+                tag: "Giới hạn",
+                price: 38000000,
+                oldPrice: 45000000,
+                image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=800&auto=format&fit=crop",
+                rating: 5,
+                desc: "Chế tác hoàn toàn thủ công từ da cá sấu tự nhiên chọn lọc bởi các nghệ nhân bậc thầy."
+            },
+            {
+                id: 5,
+                name: "Giày Tây Oxford Da Bê Pháp",
+                category: "Thời Trang",
+                tag: "Best Seller",
+                price: 9800000,
+                oldPrice: 12000000,
+                image: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?q=80&w=800&auto=format&fit=crop",
+                rating: 5,
+                desc: "Form dáng chuẩn Ý, ôm chân hoàn hảo, đế khâu Goodyear bền bỉ vượt thời gian."
+            },
+            {
+                id: 6,
+                name: "Kính Mát Gold Frame Titanium",
+                category: "Phụ Kiện",
+                tag: "Mới nhất",
+                price: 6500000,
+                oldPrice: 7500000,
+                image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=800&auto=format&fit=crop",
+                rating: 5,
+                desc: "Khung titanium siêu nhẹ mạ vàng 24K kết hợp tròng kính chống tia cực tím cao cấp."
+            },
+            {
+                id: 7,
+                name: "Áo Sơ Mi Lụa Satin Cao Cấp",
+                category: "Thời Trang",
+                tag: "Mới nhất",
+                price: 3600000,
+                oldPrice: 4200000,
+                image: "https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?q=80&w=800&auto=format&fit=crop",
+                rating: 5,
+                desc: "Chất liệu lụa satin mượt mà, thoáng mát, thiết kế tailored-fit tôn dáng lịch lãm."
+            },
+            {
+                id: 8,
+                name: "Nước Hoa Royal Gold Edition",
+                category: "Nước Hoa",
+                tag: "Best Seller",
+                price: 5400000,
+                oldPrice: 6200000,
+                image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=800&auto=format&fit=crop",
+                rating: 5,
+                desc: "Phiên bản đặc biệt kết hợp giữa hương hoa hồng Damask và xạ hương trầm lắng."
+            }
+        ];
+
+        // State Giỏ hàng
+        let cart = [];
+        let currentFilter = 'Tất cả';
+
+        // Format tiền tệ VNĐ
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+        }
+
+        // Thông báo Toast
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const icon = type === 'success' ? 'fa-circle-check text-brand-gold' : 'fa-circle-info text-blue-400';
+            toast.className = `glass-card px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-3 text-white border border-brand-gold/30 animate-fade-in pointer-events-auto`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-lg"></i><span class="text-sm font-medium">${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 400);
+            }, 3000);
+        }
+
+        // Render Sản Phẩm
+        function renderProducts(filter = 'Tất cả') {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'Tất cả' 
+                ? products 
+                : products.filter(p => p.category === filter || p.tag === filter);
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'group glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between transition-all duration-300 hover:border-brand-gold/60 hover:-translate-y-1';
+                card.innerHTML = `
+                    <div class="relative h-72 overflow-hidden bg-brand-dark cursor-pointer" onclick="openQuickView(${p.id})">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-3 left-3 flex flex-col gap-1">
+                            <span class="bg-brand-gold text-black text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">${p.tag}</span>
+                        </div>
+                        <button onclick="event.stopPropagation(); openQuickView(${p.id})" class="absolute bottom-3 right-3 bg-brand-dark/80 hover:bg-brand-gold hover:text-black text-white p-2.5 rounded-full backdrop-blur-sm transition-colors shadow-lg" title="Xem nhanh">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="p-6 flex flex-col flex-1 justify-between">
+                        <div>
+                            <span class="text-[11px] uppercase tracking-widest text-brand-muted">${p.category}</span>
+                            <h3 onclick="openQuickView(${p.id})" class="font-serif text-xl font-bold text-white mt-1 hover:text-brand-gold cursor-pointer transition-colors line-clamp-1">${p.name}</h3>
+                            <div class="flex items-center space-x-2 mt-2">
+                                <span class="font-serif text-lg font-bold text-brand-gold">${formatCurrency(p.price)}</span>
+                                <span class="text-xs text-gray-500 line-through">${formatCurrency(p.oldPrice)}</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <div class="flex text-brand-gold text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <button onclick="addToCart(${p.id})" class="gold-bg-gradient text-black font-semibold text-xs px-4 py-2.5 rounded-full hover:opacity-90 transition-all shadow flex items-center space-x-2">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Thêm Giỏ</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Lọc sản phẩm
+        function filterProducts(category, btn) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.className = 'filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all text-gray-300 hover:text-brand-gold';
+            });
+            btn.className = 'filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-all bg-brand-gold text-black shadow';
+            renderProducts(category);
+        }
+
+        function filterCategory(catName) {
+            document.getElementById('san-pham').scrollIntoView({ behavior: 'smooth' });
+            // Tìm và active tab tương ứng
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(b => {
+                if(b.innerText.toLowerCase().includes(catName.toLowerCase())) {
+                    filterProducts(b.innerText, b);
+                }
+            });
+        }
+
+        // Thêm vào giỏ hàng
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Đã thêm "${product.name}" vào giỏ hàng`);
+        }
+
+        // Cập nhật giao diện giỏ hàng
+        function updateCartUI() {
+            const countBadge = document.getElementById('cart-badge');
+            const countBadgeDrawer = document.getElementById('cart-count-badge');
+            const container = document.getElementById('cart-items-container');
+            const totalPriceEl = document.getElementById('cart-total-price');
+
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            countBadge.innerText = totalCount;
+            countBadgeDrawer.innerText = totalCount;
+            totalPriceEl.innerText = formatCurrency(totalPrice);
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-20 text-gray-500">
+                        <i class="fa-solid fa-bag-shopping text-5xl mb-4 text-brand-muted"></i>
+                        <p class="text-sm">Giỏ hàng của bạn đang trống</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center space-x-4 py-4';
+                div.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-xl border border-white/10">
+                    <div class="flex-1">
+                        <h4 class="font-serif font-bold text-white text-sm line-clamp-1">${item.name}</h4>
+                        <p class="text-brand-gold text-sm font-semibold mt-1">${formatCurrency(item.price)}</p>
+                        <div class="flex items-center space-x-3 mt-2">
+                            <div class="flex items-center border border-white/20 rounded-full overflow-hidden bg-brand-dark">
+                                <button onclick="updateQuantity(${item.id}, -1)" class="px-2.5 py-1 text-gray-400 hover:text-white">-</button>
+                                <span class="px-2 text-xs font-semibold">${item.quantity}</span>
+                                <button onclick="updateQuantity(${item.id}, 1)" class="px-2.5 py-1 text-gray-400 hover:text-white">+</button>
+                            </div>
+                            <button onclick="removeFromCart(${item.id})" class="text-gray-500 hover:text-red-400 text-xs"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Tăng giảm số lượng giỏ hàng
+        function updateQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+                updateCartUI();
+            }
+        }
+
+        // Xóa sản phẩm khỏi giỏ hàng
+        function removeFromCart(productId) {
+            cart = cart.filter(i => i.id !== productId);
+            updateCartUI();
+            showToast('Đã xóa sản phẩm khỏi giỏ hàng', 'info');
+        }
+
+        // Drawer Giỏ hàng Toggle
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            const panel = document.getElementById('cart-panel');
+            const backdrop = document.getElementById('cart-backdrop');
+
+            if (drawer.classList.contains('pointer-events-none')) {
+                drawer.classList.remove('pointer-events-none');
+                backdrop.classList.remove('opacity-0', 'pointer-events-none');
+                backdrop.classList.add('opacity-100');
+                panel.classList.remove('translate-x-full');
+            } else {
+                panel.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => drawer.classList.add('pointer-events-none'), 300);
+            }
+        }
+
+        // Thanh toán giả lập
+        function checkout() {
+            if (cart.length === 0) {
+                showToast('Giỏ hàng của bạn đang trống!', 'info');
+                return;
+            }
+            showToast('Đặt hàng thành công! Quý khách sẽ nhận cuộc gọi xác nhận từ Chim Trần Real.');
+            cart = [];
+            updateCartUI();
+            toggleCartDrawer();
+        }
+
+        // Modal Xem Nhanh (Quick View)
+        function openQuickView(productId) {
+            const product = products.find(p => p.id === productId);
+            const modal = document.getElementById('quick-view-modal');
+            const panel = document.getElementById('quick-view-panel');
+            const content = document.getElementById('quick-view-content');
+
+            content.innerHTML = `
+                <div class="h-80 md:h-full bg-brand-dark relative">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">${product.category} • ${product.tag}</span>
+                        <h2 class="font-serif text-3xl font-bold text-white mt-2 mb-4">${product.name}</h2>
+                        <div class="flex items-center space-x-3 mb-4">
+                            <span class="font-serif text-2xl font-bold text-brand-gold">${formatCurrency(product.price)}</span>
+                            <span class="text-sm text-gray-500 line-through">${formatCurrency(product.oldPrice)}</span>
+                        </div>
+                        <p class="text-gray-300 text-sm font-light leading-relaxed mb-6">${product.desc}</p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center space-x-2 text-xs text-brand-muted"><i class="fa-solid fa-check text-brand-gold"></i><span>Cam kết chính hãng 100% Real</span></div>
+                            <div class="flex items-center space-x-2 text-xs text-brand-muted"><i class="fa-solid fa-check text-brand-gold"></i><span>Miễn phí giao hàng hỏa tốc toàn quốc</span></div>
+                            <div class="flex items-center space-x-2 text-xs text-brand-muted"><i class="fa-solid fa-check text-brand-gold"></i><span>Bảo hành toàn diện 2 năm</span></div>
+                        </div>
+                    </div>
+                    <button onclick="addToCart(${product.id}); closeQuickView();" class="w-full py-4 gold-bg-gradient text-black font-bold rounded-full shadow-lg hover:opacity-90 transition-all text-center">
+                        Thêm Vào Giỏ Hàng
+                    </button>
+                </div>
+            `;
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            panel.classList.remove('scale-95');
+            panel.classList.add('scale-100');
+        }
+
+        function closeQuickView() {
+            const modal = document.getElementById('quick-view-modal');
+            const panel = document.getElementById('quick-view-panel');
+            panel.classList.remove('scale-100');
+            panel.classList.add('scale-95');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // Tìm kiếm Modal
+        function toggleSearchModal() {
+            const modal = document.getElementById('search-modal');
+            if (modal.classList.contains('pointer-events-none')) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                document.getElementById('search-input').focus();
+            } else {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        function handleSearch(query) {
+            const resultsContainer = document.getElementById('search-results');
+            if (!query.trim()) {
+                resultsContainer.innerHTML = '';
+                return;
+            }
+
+            const matched = products.filter(p => p.name.toLowerCase().includes(query.toLowerCase()) || p.category.toLowerCase().includes(query.toLowerCase()));
+            
+            if (matched.length === 0) {
+                resultsContainer.innerHTML = `<p class="text-center text-gray-500 py-8">Không tìm thấy sản phẩm phù hợp với từ khóa "${query}"</p>`;
+                return;
+            }
+
+            resultsContainer.innerHTML = '';
+            matched.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'glass-card p-4 rounded-xl flex items-center justify-between cursor-pointer hover:border-brand-gold transition-colors';
+                div.onclick = () => { toggleSearchModal(); openQuickView(p.id); };
+                div.innerHTML = `
+                    <div class="flex items-center space-x-4">
+                        <img src="${p.image}" class="w-16 h-16 object-cover rounded-lg">
+                        <div>
+                            <h4 class="font-serif font-bold text-white">${p.name}</h4>
+                            <p class="text-xs text-brand-gold mt-0.5">${formatCurrency(p.price)}</p>
+                        </div>
+                    </div>
+                    <span class="text-xs text-gray-400"><i class="fa-solid fa-chevron-right"></i></span>
+                `;
+                resultsContainer.appendChild(div);
+            });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('-translate-x-full')) {
+                menu.classList.remove('-translate-x-full');
+            } else {
+                menu.classList.add('-translate-x-full');
+            }
+        }
+
+        // Newsletter Handler
+        function handleNewsletter(e) {
+            e.preventDefault();
+            showToast('Đăng ký nhận đặc quyền VIP thành công! Cảm ơn Quý khách.');
+            e.target.reset();
+        }
+
+        // Khởi chạy khi tải trang
+        window.onload = function() {
+            renderProducts();
+        };
+    </script>
 </body>
 </html>
