@@ -654,30 +654,53 @@
         }
     </script>
 </body>
-   <!-- Bảng thông báo tự động khi mở web -->
-<div id="welcomeNoticeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="glass-panel w-full max-w-md rounded-2xl p-6 border border-blue-400/40 relative shadow-2xl bg-[#161616] text-center">
-        <div class="flex justify-between items-center mb-4 border-b border-white/10 pb-3">
-            <h3 class="font-serif text-xl font-bold text-blue-400">🔔 THÔNG BÁO HỆ THỐNG</h3>
-            <button onclick="closeWelcomeNotice()" class="text-gray-400 hover:text-white text-xl font-bold">&times;</button>
-        </div>
-        <div class="py-6 space-y-3 text-left">
-            <div class="p-4 rounded-xl bg-blue-500/10 border border-blue-400/30 space-y-2">
-                <p class="text-sm text-white font-medium">✨ <span class="font-bold text-blue-300">Đổi tiền bẩn 24/7</span></p>
-                <p class="text-sm text-white font-medium">🎲 <span class="font-bold text-blue-300">Kéo tài xỉu nhân 4</span>, không nhận đọc cầu</p>
-                <p class="text-sm text-white font-medium">📞 <span class="font-bold text-blue-300">Liên hệ zalo cho mình nhé</span></p>
-            </div>
-        </div>
-        <button onclick="closeWelcomeNotice()" class="w-full py-3 rounded-xl bg-blue-600/40 hover:bg-blue-600/60 border border-blue-400/50 text-white font-bold text-sm uppercase tracking-wider transition">
-            Đóng
-        </button>
-    </div>
-</div>
+        // Các hàm xử lý khác ở đây...
+        function checkAuthStatus() {
+            // ...
+        }
+    </script>
 
-<script>
-    // Hàm đóng bảng thông báo và tự động bật nhạc nền (nếu bạn muốn tích hợp âm thanh phía sau)
-    function closeWelcomeNotice() {
-        document.getElementById('welcomeNoticeModal').style.display = 'none';
-    }
-</script>
+    <!-- Bảng thông báo tự động khi mở web (Đặt đúng trong body) -->
+    <div id="welcomeNoticeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-md rounded-2xl p-6 border border-blue-400/40 relative shadow-2xl bg-[#161616] text-center">
+            <div class="flex justify-between items-center mb-4 border-b border-white/10 pb-3">
+                <h3 class="font-serif text-xl font-bold text-blue-400">🔔 THÔNG BÁO HỆ THỐNG</h3>
+                <button onclick="closeWelcomeNotice()" class="text-gray-400 hover:text-white text-xl font-bold">&times;</button>
+            </div>
+            <div class="py-6 space-y-3 text-left">
+                <div class="p-4 rounded-xl bg-blue-500/10 border border-blue-400/30 space-y-2">
+                    <p class="text-sm text-white font-medium">✨ <span class="font-bold text-blue-300">Đổi tiền bẩn 24/7</span></p>
+                    <p class="text-sm text-white font-medium">🎲 <span class="font-bold text-blue-300">Kéo tài xỉu nhân 4</span>, không nhận đọc cầu</p>
+                    <p class="text-sm text-white font-medium">📞 <span class="font-bold text-blue-300">Liên hệ zalo cho mình nhé</span></p>
+                </div>
+            </div>
+            <button onclick="closeWelcomeNotice()" class="w-full py-3 rounded-xl bg-blue-600/40 hover:bg-blue-600/60 border border-blue-400/50 text-white font-bold text-sm uppercase tracking-wider transition">
+                Đóng
+            </button>
+        </div>
+    </div>
+
+    <!-- Thẻ âm thanh ẩn phát nhạc nền -->
+    <audio id="bgMusic" loop>
+        <source src="snaptik.vn_7703143647864196374.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function closeWelcomeNotice() {
+            const modal = document.getElementById('welcomeNoticeModal');
+            const music = document.getElementById('bgMusic');
+            
+            if (modal) {
+                modal.style.display = 'none';
+            }
+            
+            if (music) {
+                music.play().catch(function(error) {
+                    console.log("Trình duyệt chặn tự động phát:", error);
+                });
+            }
+        }
+    </script>
+
+</body>
 </html>
