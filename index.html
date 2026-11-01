@@ -167,21 +167,26 @@
         <div class="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
             <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full glass-card border-brand-gold/40 mb-6 animate-fade-in">
                 <i class="fa-solid fa-crown text-brand-gold text-sm"></i>
-                <span class="text-xs font-semibold tracking-widest uppercase text-brand-gold">Bộ Sưu Tập Mùa Đông 2026</span>
+                <span class="text-xs font-semibold tracking-widest uppercase text-brand-gold">CHIM TRẦN REAL</span>
             </div>
             <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-none">
-                Đẳng Cấp <span class="gold-gradient italic">Thượng Lưu</span>
+                CHIM TRẦN <span class="gold-gradient italic">REAL</span>
             </h1>
-            <p class="max-w-2xl mx-auto text-gray-300 text-base sm:text-xl mb-10 font-light leading-relaxed">
-                Khám phá tuyệt tác thời gian và thời trang cao cấp từ Chim Trần Real. Nơi sự tinh tế kết hợp hoàn hảo cùng phong cách cá nhân độc tôn.
+            <p class="max-w-2xl mx-auto text-gray-300 text-base sm:text-lg mb-6 font-light leading-relaxed">
+                Kéo tài xỉu, Nhận đổi tiền bẩn, Kéo baccarat, Không nhận đọc cầu
             </p>
+            <div class="inline-block px-6 py-2 rounded-full glass-card border border-brand-gold/30 text-brand-gold text-sm font-medium mb-10 tracking-wider">
+                Zalo hỗ trợ: 096318996 &nbsp;|&nbsp; Tele: @chimtran1999
+            </div>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#san-pham" class="w-full sm:w-auto px-8 py-4 gold-bg-gradient text-black font-semibold rounded-full shadow-lg shadow-brand-gold/20 hover:opacity-90 transition-all transform hover:-translate-y-0.5 text-center">
-                    Khám Phá Bộ Sưu Tập
+                <a href="https://zalo.me/096318996" target="_blank" class="w-full sm:w-auto px-8 py-4 gold-bg-gradient text-black font-semibold rounded-full shadow-lg shadow-brand-gold/20 hover:opacity-90 transition-all transform hover:-translate-y-0.5 text-center flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>Liên Hệ Chim Trần</span>
                 </a>
-                <a href="#ve-chung-toi" class="w-full sm:w-auto px-8 py-4 glass-card text-white hover:border-brand-gold font-semibold rounded-full transition-all text-center">
-                    Câu Chuyện Thương Hiệu
-                </a>
+                <button onclick="openServiceModal()" class="w-full sm:w-auto px-8 py-4 glass-card text-white hover:border-brand-gold font-semibold rounded-full transition-all text-center flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-layer-group text-brand-gold"></i>
+                    <span>Xem Dịch Vụ</span>
+                </button>
             </div>
 
             <!-- Stats Bar -->
@@ -518,6 +523,74 @@
             <div id="search-results" class="mt-8 space-y-4 max-h-[60vh] overflow-y-auto">
                 <!-- Results injected here -->
             </div>
+        </div>
+    </div>
+
+    <!-- TỔNG HỢP DỊCH VỤ MODAL (Light Gray Theme as requested) -->
+    <div id="service-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div onclick="closeServiceModal()" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="relative bg-gray-100 text-gray-900 border border-gray-300 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl z-10 transform scale-95 transition-transform duration-300 p-8" id="service-panel">
+            <button onclick="closeServiceModal()" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <span class="text-xs uppercase tracking-[0.2em] text-amber-700 font-bold">Chim Trần Real Atelier</span>
+                <h3 class="font-serif text-3xl font-bold text-gray-900 mt-1">TỔNG HỢP DỊCH VỤ</h3>
+                <div class="w-12 h-0.5 bg-amber-600 mx-auto mt-2"></div>
+            </div>
+
+            <div class="space-y-4">
+                <button onclick="openExchangeModal()" class="w-full p-4 bg-white hover:bg-amber-50 border border-gray-300 hover:border-amber-500 rounded-2xl shadow-sm flex items-center justify-between transition-all group">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-money-bill-transfer"></i>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-bold text-gray-900 group-hover:text-amber-700 transition-colors">Đổi Tiền Bẩn</h4>
+                            <p class="text-xs text-gray-500">Tỉ lệ quy đổi siêu tốc 1:4 (Sạch - Bẩn)</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-amber-700"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ĐỔI TIỀN BẨN SUB-MODAL -->
+    <div id="exchange-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div onclick="closeExchangeModal()" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="relative bg-gray-100 text-gray-900 border border-gray-300 rounded-3xl max-w-md w-full overflow-hidden shadow-2xl z-10 transform scale-95 transition-transform duration-300 p-8" id="exchange-panel">
+            <button onclick="closeExchangeModal()" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <h3 class="font-serif text-2xl font-bold text-gray-900">Quy Đổi Tiền Bẩn</h3>
+                <p class="text-xs text-gray-600 mt-1">Tỉ lệ: 500.000đ Tiền Sạch = 2.000.000đ Tiền Bẩn (x4)</p>
+            </div>
+
+            <div class="space-y-4 mb-6">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">Chọn mệnh giá tiền sạch muốn đổi:</label>
+                    <select id="clean-amount-select" onchange="calculateExchange()" class="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-gray-900 font-semibold focus:outline-none focus:border-amber-600 shadow-sm">
+                        <option value="500000">500.000 đ (Nhận 2.000.000 đ tiền bẩn)</option>
+                        <option value="1000000">1.000.000 đ (Nhận 4.000.000 đ tiền bẩn)</option>
+                        <option value="2000000">2.000.000 đ (Nhận 8.000.000 đ tiền bẩn)</option>
+                        <option value="5000000">5.000.000 đ (Nhận 20.000.000 đ tiền bẩn)</option>
+                        <option value="10000000">10.000.000 đ (Nhận 40.000.000 đ tiền bẩn)</option>
+                    </select>
+                </div>
+
+                <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl flex items-center justify-between">
+                    <span class="text-xs text-gray-700 font-medium">Số tiền bẩn nhận được:</span>
+                    <span id="dirty-result-preview" class="font-serif text-xl font-bold text-amber-700">2.000.000 đ</span>
+                </div>
+            </div>
+
+            <button onclick="submitExchange()" class="w-full py-3.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl shadow-lg transition-all text-center">
+                Xác Nhận Đổi
+            </button>
         </div>
     </div>
 
@@ -921,6 +994,70 @@
             e.preventDefault();
             showToast('Đăng ký nhận đặc quyền VIP thành công! Cảm ơn Quý khách.');
             e.target.reset();
+        }
+
+        // Service Modal Handlers
+        function openServiceModal() {
+            const modal = document.getElementById('service-modal');
+            const panel = document.getElementById('service-panel');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            panel.classList.remove('scale-95');
+            panel.classList.add('scale-100');
+        }
+
+        function closeServiceModal() {
+            const modal = document.getElementById('service-modal');
+            const panel = document.getElementById('service-panel');
+            panel.classList.remove('scale-100');
+            panel.classList.add('scale-95');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // Exchange Modal Handlers
+        function openExchangeModal() {
+            closeServiceModal();
+            const modal = document.getElementById('exchange-modal');
+            const panel = document.getElementById('exchange-panel');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            panel.classList.remove('scale-95');
+            panel.classList.add('scale-100');
+            calculateExchange();
+        }
+
+        function closeExchangeModal() {
+            const modal = document.getElementById('exchange-modal');
+            const panel = document.getElementById('exchange-panel');
+            panel.classList.remove('scale-100');
+            panel.classList.add('scale-95');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function calculateExchange() {
+            const cleanVal = parseInt(document.getElementById('clean-amount-select').value) || 0;
+            const dirtyVal = cleanVal * 4;
+            document.getElementById('dirty-result-preview').innerText = formatCurrency(dirtyVal);
+        }
+
+        function submitExchange() {
+            closeExchangeModal();
+            
+            // Show toast processing
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `glass-card px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-3 text-white border border-brand-gold/30 animate-fade-in pointer-events-none`;
+            toast.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-brand-gold text-lg"></i><span class="text-sm font-medium">Hệ thống đang xử lý...</span>`;
+            container.appendChild(toast);
+
+            // After 5 seconds, update to error
+            setTimeout(() => {
+                toast.className = `glass-card px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-3 text-white border border-red-500/50 animate-fade-in pointer-events-none bg-red-950/80`;
+                toast.innerHTML = `<i class="fa-solid fa-circle-exclamation text-red-400 text-lg"></i><span class="text-sm font-bold text-red-200">Số dư không đủ</span>`;
+                
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    setTimeout(() => toast.remove(), 400);
+                }, 4000);
+            }, 5000);
         }
 
         // Khởi chạy khi tải trang
